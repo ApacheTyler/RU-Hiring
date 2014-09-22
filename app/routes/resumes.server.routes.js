@@ -9,6 +9,9 @@ module.exports = function(app) {
 		.get(resumes.list)
 		.post(users.requiresLogin, resumes.create);
 
+    app.route('/resumes/all')
+        .get(resumes.listAll);
+
 	app.route('/resumes/:resumeId')
 		.get(resumes.read)
 		.put(users.requiresLogin, resumes.hasAuthorization, resumes.update)

@@ -98,7 +98,7 @@ exports.delete = function(req, res) {
 /**
  * List of Resumes
  */
-exports.list = function(req, res) { Resume.find().sort('-created').populate('user', 'displayName').exec(function(err, resumes) {
+exports.list = function(req, res) { Resume.find().sort('-created').where('user').equals(req.user.id).populate('user', 'displayName').exec(function(err, resumes) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
@@ -107,6 +107,17 @@ exports.list = function(req, res) { Resume.find().sort('-created').populate('use
 			res.jsonp(resumes);
 		}
 	});
+};
+
+exports.listAll = function(req, res) { Resume.find().sort('-created').where('user').equals(req.user.id).populate('user', 'displayName').exec(function(err, resumes) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            res.jsonp(resumes);
+        }
+    });
 };
 
 /**
