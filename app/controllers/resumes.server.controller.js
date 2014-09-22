@@ -8,11 +8,27 @@ var mongoose = require('mongoose'),
 	Resume = mongoose.model('Resume'),
 	_ = require('lodash');
 
+var getUserResumeAndDelete = function(req, res){
+    return Resume.find().select('user').where({'user': req.user.id}).remove().exec(function(err, resumes){
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            console.log(resumes + 'deleted');
+        }
+    });
+};
+
 /**
  * Create a Resume
  */
 exports.create = function(req, res) {
-	var resume = new Resume(req.body);
+
+    //Delete old resume if already exist
+    getUserResumeAndDelete(req, res);
+
+    var resume = new Resume(req.body);
 	resume.user = req.user;
 
 	resume.save(function(err) {
@@ -37,7 +53,17 @@ exports.read = function(req, res) {
  * Update a Resume
  */
 exports.update = function(req, res) {
-	var resume = req.resume ;
+	var resume = //req.resume ;
+        Resume.find().select('user').where({'user': req.user.id}).exec(function(err, resume){
+            if (err) {
+                return res.status(400).send({
+                    message: errorHandler.getErrorMessage(err)
+                });
+            } else {
+                return resume;
+            }
+        });
+
 
 	resume = _.extend(resume , req.body);
 

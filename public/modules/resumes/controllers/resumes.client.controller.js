@@ -57,7 +57,7 @@ angular.module('resumes').controller('ResumesController', ['$scope', '$statePara
 
 		// Find existing Resume
 		$scope.findOne = function() {
-			$scope.resume = Resumes.get({ 
+			$scope.resume = Resumes.get({
 				resumeId: $stateParams.resumeId
 			});
 		};
