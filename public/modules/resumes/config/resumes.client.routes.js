@@ -20,6 +20,10 @@ angular.module('resumes').config(['$stateProvider',
 		state('editResume', {
 			url: '/resumes/:resumeId/edit',
 			templateUrl: 'modules/resumes/views/edit-resume.client.view.html'
+		}).
+		state('userResume', {
+			url: '/resumes_users',
+			templateUrl: 'modules/resumes/views/user-resume.client.view.html'
 		});
 	}
 ]);

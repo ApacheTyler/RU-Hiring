@@ -9,6 +9,10 @@ module.exports = function(app) {
 		.get(resumes.list)
 		.post(users.requiresLogin, resumes.create);
 
+	app.route('/resumes_users')
+		.get(users.requiresLogin, resumes.userResume)
+        .post(users.requiresLogin, resumes.create);
+
     app.route('/resumes/all')
         .get(resumes.listAll);
 

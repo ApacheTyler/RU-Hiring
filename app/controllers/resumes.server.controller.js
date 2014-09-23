@@ -98,7 +98,7 @@ exports.delete = function(req, res) {
 /**
  * List of Resumes
  */
-exports.list = function(req, res) { Resume.find().sort('-created').where('user').equals(req.user.id).populate('user', 'displayName').exec(function(err, resumes) {
+exports.list = function(req, res) { Resume.find().sort('-created').populate('user', 'displayName').exec(function(err, resumes) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
@@ -109,7 +109,7 @@ exports.list = function(req, res) { Resume.find().sort('-created').where('user')
 	});
 };
 
-exports.listAll = function(req, res) { Resume.find().sort('-created').where('user').equals(req.user.id).populate('user', 'displayName').exec(function(err, resumes) {
+exports.listAll = function(req, res) { Resume.find().sort('-created').populate('user', 'displayName').exec(function(err, resumes) {
         if (err) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
@@ -129,6 +129,20 @@ exports.resumeByID = function(req, res, next, id) { Resume.findById(id).populate
 		req.resume = resume ;
 		next();
 	});
+};
+
+/**
+*Gets user resume for single user
+**/
+exports.userResume = function(req, res) {
+        Resume.findOne().where('user').equals(req.user.id).populate('user', 'displayName').exec(function(err, resume) {
+        if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		}
+        res.jsonp(resume);
+    });
 };
 
 /**

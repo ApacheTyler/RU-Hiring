@@ -2,12 +2,17 @@
 
 //Resumes service used to communicate Resumes REST endpoints
 angular.module('resumes').factory('Resumes', ['$resource',
-	function($resource) {
-		return $resource('resumes/:resumeId', { resumeId: '@_id'
-		}, {
-			update: {
-				method: 'PUT'
+			function($resource) {
+				return $resource('resumes/:resumeId', { resumeId: '@_id'
+				}, {
+					update: {
+						method: 'PUT'
+					}
+				});
 			}
-		});
-	}
-]);
+		])
+	.factory('UserResumes', ['$resource',
+		function($resource) {
+			return $resource('/resumes_users');
+		}
+	]);

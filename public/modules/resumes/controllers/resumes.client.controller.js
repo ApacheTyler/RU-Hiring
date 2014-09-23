@@ -1,8 +1,8 @@
 'use strict';
 
 // Resumes controller
-angular.module('resumes').controller('ResumesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Resumes',
-	function($scope, $stateParams, $location, Authentication, Resumes ) {
+angular.module('resumes').controller('ResumesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Resumes', 'UserResumes',
+	function($scope, $stateParams, $location, Authentication, Resumes, UserResumes ) {
 		$scope.authentication = Authentication;
 
 		// Create new Resume
@@ -41,8 +41,7 @@ angular.module('resumes').controller('ResumesController', ['$scope', '$statePara
 
 		// Update existing Resume
 		$scope.update = function() {
-			var resume = $scope.resume ;
-
+			var resume = $scope.resume;
 			resume.$update(function() {
 				$location.path('resumes/' + resume._id);
 			}, function(errorResponse) {
@@ -61,5 +60,25 @@ angular.module('resumes').controller('ResumesController', ['$scope', '$statePara
 				resumeId: $stateParams.resumeId
 			});
 		};
+
+        $scope.findUserResume = function(){
+            $scope.resume = UserResumes.get();
+        };
+
+        $scope.saveUserResume = function(){
+            // Create new Resume object
+            var resume = new UserResumes ({
+                name: $scope.resume.name
+            });
+
+            resume.$save(function(response) {//Success
+                $location.path('resumes/' + response._id);
+                $scope.name = '';
+            },
+            function(errorResponse) {//Error
+                $scope.error = errorResponse.data.message;
+            });
+        };
+
 	}
 ]);
