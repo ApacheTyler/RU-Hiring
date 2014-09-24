@@ -5,6 +5,8 @@ angular.module('resumes').controller('ResumesController', ['$scope', '$statePara
 	function($scope, $stateParams, $location, Authentication, Resumes, UserResumes ) {
 		$scope.authentication = Authentication;
 
+        $scope.ranks = ['Freshman', 'Sophmore', 'Junior', 'Senior'];
+
 		// Create new Resume
 		$scope.create = function() {
 			// Create new Resume object

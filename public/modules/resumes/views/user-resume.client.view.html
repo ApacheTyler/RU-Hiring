@@ -1,6 +1,6 @@
 <section data-ng-controller="ResumesController" data-ng-init="findUserResume()">
     <div class="page-header">
-        <h1>Edit Resume</h1>
+        <h1>Your Resume'</h1>
     </div>
     <div class="col-md-12">
         <form class="form-horizontal" data-ng-submit="saveUserResume()" novalidate>
@@ -10,6 +10,15 @@
                     <div class="controls">
                         <input type="text" data-ng-model="resume.name" id="name" class="form-control" placeholder="Name" required>
                     </div>
+                    <label class="control-label" for="gender">Gender</label>
+                    <div class="controls">
+                        <input type="radio" name="sex" data-ng-model="resume.gender" checked="checked" value="male"> Male<br>
+                        <input type="radio" name="sex" data-ng-model="resume.gender" value="female"> Female
+                    </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label" for="rank">Class Rank</label><br />
+                  <select style="width:200px" ng-model="resume.rank" ng-options="rank for rank in ranks"></select><br>
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Update" class="btn btn-default">
