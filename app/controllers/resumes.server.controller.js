@@ -37,6 +37,7 @@ exports.create = function(req, res) {
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
+            console.log("succeeded in creating");
 			res.jsonp(resume);
 		}
 	});
@@ -136,11 +137,15 @@ exports.resumeByID = function(req, res, next, id) { Resume.findById(id).populate
 **/
 exports.userResume = function(req, res) {
         Resume.findOne().where('user').equals(req.user.id).populate('user', 'displayName').exec(function(err, resume) {
+
         if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		}
+        if(resume === null){
+            resume = new Resume();
+        }
         res.jsonp(resume);
     });
 };

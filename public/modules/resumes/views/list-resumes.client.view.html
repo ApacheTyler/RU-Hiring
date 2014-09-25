@@ -4,16 +4,23 @@
     </div>
     <div class="list-group">
         <a data-ng-repeat="resume in resumes" data-ng-href="#!/resumes/{{resume._id}}" class="list-group-item">
-			<small class="list-group-item-text">
-				Posted on
-				<span data-ng-bind="resume.created | date:'medium'"></span>
-				by
-				<span data-ng-bind="resume.user.displayName"></span>
-			</small>
-			<h4 class="list-group-item-heading" data-ng-bind="resume.name"></h4>
+      <p>
+        <img data-ng-if="resume.picture !== ''" style="max-width: 100px; float: left; padding: 0 11px 0 0;" src="{{resume.picture}}" alt="resume.name" class="img-circle">
+      </p>
+      <small class="list-group-item-text">
+        Updated on
+        <span data-ng-bind="resume.created | date:'medium'"></span>
+      </small>
+      <h4 class="list-group-item-heading" data-ng-bind="resume.name"></h4>
+      <blockquote data-ng-if="resume.quote !== ''">
+        <h3 style="display: inline">"</h3>{{resume.quote}}
+      </blockquote>
+      <p data-ng-bind="resume.description">
+
+      </p>
         </a>
     </div>
     <div class="alert alert-warning text-center" data-ng-hide="!resumes.$resolved || resumes.length">
-    	No Resumes yet, why don't you <a href="/#!/resumes/create">create one</a>?
+      No Resumes yet, why don't you <a href="/#!/resumes/create">create one</a>?
     </div>
 </section>

@@ -108,6 +108,7 @@ angular.module('resumes').controller('ResumesController', ['$scope', '$statePara
 		// Find a list of Resumes
 		$scope.find = function() {
 			$scope.resumes = Resumes.query();
+            console.log($scope.resumes);
 		};
 
 		// Find existing Resume
@@ -124,7 +125,14 @@ angular.module('resumes').controller('ResumesController', ['$scope', '$statePara
         $scope.saveUserResume = function(){
             // Create new Resume object
             var resume = new UserResumes ({
-                name: $scope.resume.name
+                name: $scope.resume.name,
+                gender: $scope.resume.gender,
+                rank: $scope.resume.rank,
+                classes: $scope.resume.classes,
+                description: $scope.resume.description,
+                workHistory: $scope.resume.workHistory,
+                quote: $scope.resume.quote,
+                picture: $scope.resume.picture
             });
 
             resume.$save(function(response) {//Success
