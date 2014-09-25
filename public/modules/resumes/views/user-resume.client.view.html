@@ -3,23 +3,78 @@
         <h1>Your Resume'</h1>
     </div>
     <div class="col-md-12">
-        <form class="form-horizontal" data-ng-submit="saveUserResume()" novalidate>
+        <form class="form-horizontal" data-ng-submit="logger()" novalidate><!--change back to saveUserResume()-->
             <fieldset>
                 <div class="form-group">
                     <label class="control-label" for="name">Name</label>
                     <div class="controls">
                         <input type="text" data-ng-model="resume.name" id="name" class="form-control" placeholder="Name" required>
                     </div>
+                </div>
+                <hr />
+                <div class="form-group">
                     <label class="control-label" for="gender">Gender</label>
                     <div class="controls">
                         <input type="radio" name="sex" data-ng-model="resume.gender" checked="checked" value="male"> Male<br>
                         <input type="radio" name="sex" data-ng-model="resume.gender" value="female"> Female
                     </div>
                 </div>
+                <hr />
                 <div class="form-group">
                   <label class="control-label" for="rank">Class Rank</label><br />
                   <select style="width:200px" ng-model="resume.rank" ng-options="rank for rank in ranks"></select><br>
                 </div>
+                <hr />
+                <div class="form-group">
+                  <label class="control-label" for="classes">Classes Taken</label><br />
+                  <div data-ng-repeat="className in allClasses">
+                    <input type="checkbox" ng-model="doodoo" ng-change="addClass(className)"> ITEC {{className}}<br>
+                  </div>
+                </div>
+                <hr />
+                <div class="form-group">
+                  <label class="control-label" for="description">Personal Description</label><br />
+                  <textarea class="form-control" style="height:200px" ng-model="resume.description"></textarea>
+                </div>
+                <hr />
+
+
+
+                <div class="form-group">
+                  <label class="control-label" for="jobTitle">Work Experience</label><br /><br /><br />
+
+
+                  <label class="control-label" for="jobTitle">Job Title</label><br />
+                  <input type="text" class="form-control" ng-model="jobTitle" placeholder="Job Title"/><br />
+
+                  <label class="control-label" for="jobDesc">Job Description</label><br />
+                  <textarea class="form-control" style="height:100px" ng-model="jobDesc" placeholder="Job Description"/></textarea><br />
+
+                  <div data-ng-show="jobError" class="form-group has-error">
+                    <label class="control-label" for="inputError1">Both fiels must be filled out</label>
+                  </div>
+
+                  <br />
+                  <input type="button" class='btn btn-success' value='Add another experience' ng-click="addJob()">
+
+                  <div data-ng-repeat="job in resume.workHistory">
+                    <br />
+                    <div class="well" data-ng-if='job !== null'>
+                      <label class="control-label" for="jobTitle">Job Title</label><br />
+                      <input type="text" class="form-control" ng-model="job.jobTitle" placeholder="Job Title"/><br />
+                      <label class="control-label" for="jobDesc">Job Description</label><br />
+                      <textarea class="form-control" style="height:100px" ng-model="job.jobDesc" placeholder="Job Description"/></textarea><br />
+                      <input type="button" class='btn btn-danger' value='Delete experience' ng-click="deleteJob($index)">
+                    </div>
+
+                  </div>
+
+
+                </div>
+
+
+
+
                 <div class="form-group">
                     <input type="submit" value="Update" class="btn btn-default">
                 </div>

@@ -3,9 +3,63 @@
 // Resumes controller
 angular.module('resumes').controller('ResumesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Resumes', 'UserResumes',
 	function($scope, $stateParams, $location, Authentication, Resumes, UserResumes ) {
+
 		$scope.authentication = Authentication;
 
+        $scope.jobCounter = 1;
+
+        $scope.jobError = false;
+
+        $scope.jobTitle = '';
+        $scope.jobDesc = '';
+
+        //Possible ranks for college student
         $scope.ranks = ['Freshman', 'Sophmore', 'Junior', 'Senior'];
+
+        //Arbitrary value set for checkboxes ng-model
+        $scope.doodoo = 'null';
+
+        //Number of work histories entered
+        $scope.workHistoryCounter = 1;
+
+        //Class numbers in ITEC
+        $scope.allClasses = [
+                '110',
+                '120',
+                '122',
+                '220',
+                '225',
+                '226',
+                '227',
+                '281',
+                '310',
+                '315',
+                '320',
+                '324',
+                '325',
+                '335',
+                '340',
+                '345',
+                '350',
+                '352',
+                '360',
+                '370',
+                '371',
+                '380',
+                '420',
+                '425',
+                '441',
+                '442',
+                '451',
+                '452',
+                '471',
+                '472',
+                '485',
+                '490',
+                '495'
+        ];
+
+
 
 		// Create new Resume
 		$scope.create = function() {
@@ -80,6 +134,42 @@ angular.module('resumes').controller('ResumesController', ['$scope', '$statePara
             function(errorResponse) {//Error
                 $scope.error = errorResponse.data.message;
             });
+        };
+
+        $scope.addClass = function(className){
+            var index = $scope.resume.classes.indexOf(className);
+            if(index === -1){
+                $scope.resume.classes.push(className);
+            }
+            else{
+                $scope.resume.classes.splice(index, 1);
+            }
+
+        };
+
+        $scope.addJob = function(){
+            if($scope.jobDesc !== '' && $scope.jobTitle !== ''){
+                var jobToAdd = {
+                    jobTitle: $scope.jobTitle,
+                    jobDesc: $scope.jobDesc
+                };
+                $scope.resume.workHistory.push(jobToAdd);
+                $scope.jobError = false;
+                $scope.jobTitle = '';
+                $scope.jobDesc = '';
+            }
+            else{
+                $scope.jobError = true;
+            }
+        };
+
+        $scope.deleteJob = function(index){
+            $scope.resume.workHistory.splice(index, 1);
+        };
+
+
+        $scope.logger = function(){
+            console.log($scope.resume);
         };
 
 	}
