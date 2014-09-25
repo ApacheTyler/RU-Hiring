@@ -41,24 +41,20 @@
 
 
                 <div class="form-group">
-                  <label class="control-label" for="jobTitle">Work Experience</label><br /><br /><br />
-
-
+                  <label class="control-label" for="jobTitle">Add Work Experience</label><br /><br />
                   <label class="control-label" for="jobTitle">Job Title</label><br />
                   <input type="text" class="form-control" ng-model="jobTitle" placeholder="Job Title"/><br />
-
                   <label class="control-label" for="jobDesc">Job Description</label><br />
                   <textarea class="form-control" style="height:100px" ng-model="jobDesc" placeholder="Job Description"/></textarea><br />
 
                   <div data-ng-show="jobError" class="form-group has-error">
                     <label class="control-label" for="inputError1">Both fiels must be filled out</label>
                   </div>
-
+                  <input type="button" class='btn btn-success' value='Add experience' ng-click="addJob()">
                   <br />
-                  <input type="button" class='btn btn-success' value='Add another experience' ng-click="addJob()">
-
+                  <br />
+                  <label data-ng-if="resume.workHistory.length > 1" class="control-label" for="jobTitle">Existing Work Experience</label>
                   <div data-ng-repeat="job in resume.workHistory">
-                    <br />
                     <div class="well" data-ng-if='job !== null'>
                       <label class="control-label" for="jobTitle">Job Title</label><br />
                       <input type="text" class="form-control" ng-model="job.jobTitle" placeholder="Job Title"/><br />
@@ -66,17 +62,22 @@
                       <textarea class="form-control" style="height:100px" ng-model="job.jobDesc" placeholder="Job Description"/></textarea><br />
                       <input type="button" class='btn btn-danger' value='Delete experience' ng-click="deleteJob($index)">
                     </div>
-
                   </div>
-
-
                 </div>
-
-
-
-
+                <hr />
                 <div class="form-group">
-                    <input type="submit" value="Update" class="btn btn-default">
+                  <label class="control-label" for="quote">Enter a personal quote</label>
+                  <input type="text" class="form-control" ng-model="resume.quote"/>
+                </div>
+                <hr />
+                <div class="form-group">
+                  <label class="control-label" for="picture">Enter URL for personal picture</label>
+                  <input type="text" class="form-control" ng-model="resume.picture" placeholder="Picture URL"/>
+                </div>
+                <br />
+                <br />
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary">
                 </div>
         <div data-ng-show="error" class="text-danger">
           <strong data-ng-bind="error"></strong>
