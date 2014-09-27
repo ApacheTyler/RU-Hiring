@@ -144,6 +144,17 @@ angular.module('resumes').controller('ResumesController', ['$scope', '$statePara
             });
         };
 
+
+		$scope.checkInClasses = function(className){
+            var index = $scope.resume.classes.indexOf(className);
+            if(index === -1){
+                return '';
+            }
+            else{
+                return 'checked';
+            }
+		};
+
         $scope.addClass = function(className){
             var index = $scope.resume.classes.indexOf(className);
             if(index === -1){
@@ -154,6 +165,7 @@ angular.module('resumes').controller('ResumesController', ['$scope', '$statePara
             }
 
         };
+
 
         $scope.addJob = function(){
             if($scope.jobDesc !== '' && $scope.jobTitle !== ''){

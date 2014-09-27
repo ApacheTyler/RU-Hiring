@@ -1,8 +1,49 @@
-<section data-ng-controller="ResumesController" data-ng-init="findOne()">
-	<div class="page-header">
-		<h1 data-ng-bind="resume.name"></h1>
+<div data-ng-controller="ResumesController" data-ng-init="findOne()">
+	<div class="page-header" style="overflow: hidden;">
+		<h1 style="display: inline-block; padding-top: 20px;" data-ng-bind="resume.name"></h1>
+		<img data-ng-if="resume.picture !== ''" style="width: 120px" src="{{resume.picture}}" alt="resume.name" class="pull-right img-thumbnail">
 	</div>
-	<div class="pull-right" data-ng-show="authentication.user._id == resume.user._id">
+	<div>
+		<strong data-ng-if="resume.quote != ''">Personal Quote</strong>
+		<blockquote data-ng-if="resume.quote != ''">
+			" {{resume.quote}}
+		</blockquote>
+		<p>
+			<strong>Gender: </strong>
+			<em class="text-capitalize">{{resume.gender}}</em>
+		</p>
+		<p>
+			<strong>Class Rank: </strong>
+			<em class="text-capitalize">{{resume.rank}}</em>
+		</p>
+		<hr />
+		<p data-ng-if="resume.classes.length > 1">
+			<h4>Classes Taken</h4>
+			<ul class="list-group">
+  			<li ng-repeat="class in resume.classes" data-ng-if="class !== null" class="list-group-item">
+    			ITEC {{class}}
+  			</li>
+			</ul>
+		</p>
+		<hr />
+		<p data-ng-if="resume.description != ''">
+			<h4>Personal Description</h4>
+			<div class="panel panel-default">
+  			<div class="panel-body">
+    			{{resume.description}}
+  			</div>
+			</div>
+		</p>
+		<p data-ng-if="resume.workHistory.length > 1">
+			<h4>Work History</h4>
+			<div data-ng-repeat="job in resume.workHistory" data-ng-if="job != null" class="panel panel-success">
+			<div class="panel-heading">
+				<h5 class="panel-title">{{job.jobTitle}}</h5>
+			</div>
+			<div class="panel-body">{{job.jobDesc}}</div>
+		</p>
+	</div>
+	<div class="" style="clear: both" data-ng-show="authentication.user._id == resume.user._id">
 		<a class="btn btn-primary" href="/#!/resumes_users">
 			<i class="glyphicon glyphicon-edit"></i>
 		</a>
@@ -18,4 +59,4 @@
 			<span data-ng-bind="resume.user.displayName"></span>
 		</em>
 	</small>
-</section>
+</div>

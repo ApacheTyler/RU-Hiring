@@ -28,7 +28,7 @@
                 <div class="form-group">
                   <label class="control-label" for="classes">Classes Taken</label><br />
                   <div data-ng-repeat="className in allClasses">
-                    <input type="checkbox" ng-model="doodoo" ng-change="addClass(className)"> ITEC {{className}}<br>
+                    <input type="checkbox" ng-model="doodoo" ng-checked="resume.classes.indexOf(className) > 0" ng-change="addClass(className)"> ITEC {{className}}<br>
                   </div>
                 </div>
                 <hr />
