@@ -1,6 +1,9 @@
 .content {
 	margin-top: 50px;
 }
+.brand-color{
+	color: #990000 !important;
+}
 .undecorated-link:hover {
 	text-decoration: none;
 }
