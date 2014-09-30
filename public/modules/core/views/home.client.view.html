@@ -9,10 +9,11 @@
 	</div>
 	<section data-ng-controller="ResumesController" data-ng-init="find()">
 			<div class="page-header">
-					<h1>Resumes</h1>
+					<h3>Search Resumes</h3>
+					<input class="form-control" ng-model="searchText" placeholder="Search by name, course number, or class rank">
 			</div>
 			<div class="list-group">
-					<a data-ng-repeat="resume in resumes" data-ng-href="#!/resumes/{{resume._id}}" class="list-group-item">
+					<a data-ng-repeat="resume in resumes | filter:searchText:strict" data-ng-href="#!/resumes/{{resume._id}}" class="list-group-item">
 				<p>
 					<img data-ng-if="resume.picture !== ''" style="max-width: 100px; float: left; padding: 0 11px 0 0;" src="{{resume.picture}}" alt="resume.name" class="img-circle">
 				</p>

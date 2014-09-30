@@ -17,6 +17,10 @@ angular.module('resumes').config(['$stateProvider',
 			url: '/resumes/:resumeId',
 			templateUrl: 'modules/resumes/views/view-resume.client.view.html'
 		}).
+        state('userViewResume', {
+            url: '/resumes_users/view',
+            templateUrl: 'modules/resumes/views/user-view-resume.client.view.html'
+        }).
 		state('editResume', {
 			url: '/resumes/:resumeId/edit',
 			templateUrl: 'modules/resumes/views/edit-resume.client.view.html'
