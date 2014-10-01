@@ -1,7 +1,7 @@
 {
 	"name": "ru-hiring",
 	"description": "Software Engineering 3 Resume Website",
-	"version": "0.0.1",
+	"version": "0.0.1-1",
 	"author": "Tyler",
 	"engines": {
 		"node": "0.10.x",
@@ -63,5 +63,6 @@
 		"karma-chrome-launcher": "~0.1.2",
 		"karma-firefox-launcher": "~0.1.3",
 		"karma-phantomjs-launcher": "~0.1.2"
-	}
+	},
+	"subdomain": "softeng2spikeexercise-meanApp"
 }
