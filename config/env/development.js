@@ -8,7 +8,7 @@ module.exports = {
 	facebook: {
 		clientID: '581912011912919',
         clientSecret: 'f63322f4748c492540616e81169236cd',
-		callbackURL: 'http://localhost:3000/auth/facebook/callback'
+		callbackURL: 'http://ancient-thicket-7858.herokuapp.com/auth/facebook/callback'
 	},
 	twitter: {
 		clientID: process.env.TWITTER_KEY || 'CONSUMER_KEY',
